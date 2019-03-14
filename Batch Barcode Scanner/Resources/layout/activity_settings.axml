@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_view">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+		<RelativeLayout
+			android:id="@+id/header"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:layout_alignParentTop="true"
+			android:background="@color/colorHeader"
+			android:gravity="center"
+			android:layout_marginTop="55dp"
+			android:layout_gravity="center">
+			<TextView
+				android:id="@+id/header_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/settings_table"
+				android:textColor="#FFFFFF"
+				android:textSize="25sp"
+
+                />
+		</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorHeader"
+            android:gravity="center"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/footer_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:textSize="25sp"/>
+        </RelativeLayout>
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/footer"
+            android:layout_below="@+id/header"
+            android:fillViewport="true">
+            <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff">
+                <!-- Row 1 with two columns -->
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/submit_data_url"
+                        android:text="Submit data url"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+
+                        />
+                </TableRow>
+                <!-- Row 2 with two columns -->
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/load_config_url"
+                        android:text="Load Config url"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+
+                        />
+                </TableRow>
+                <!-- Row 3 with two columns -->
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/application_key"
+                        android:text="Application Key"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/retention_period"
+                        android:text="Retention Period"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+
+                        />
+                </TableRow>
+                <!-- Row 4 with single column -->
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:gravity="center_horizontal"
+                    android:minWidth="25dp"
+                    android:minHeight="25dp">
+                    <TextView
+                        android:minWidth="30dp"
+                        android:minHeight="30dp"
+                        android:id="@+id/textView1" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/TextView04" android:text="@string/regex_table"
+                        android:layout_weight="1" android:background="@color/colorHeader"
+                        android:textColor="#FFF"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:gravity="center"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/regex_viewer"
+                        android:scrollbars="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginBottom="0.0dp"
+						android:text="Regexes Not loaded"
+					
+					/>
+                </TableRow>
+            </TableLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+    <EditText
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+
+        android:id="@+id/txtentry" />
+</android.support.design.widget.CoordinatorLayout>

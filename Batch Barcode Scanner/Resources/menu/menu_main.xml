@@ -1,9 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+  <item
+      android:id="@+id/menu_signature"
+      android:orderInCategory="1"
+      android:title="@string/action_signature"
+      app:showAsAction="never" />
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:id="@+id/menu_settings"
+        android:orderInCategory="2"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+  
+  <item android:id="@+id/menu_sqldata" android:title="Show Scan Data" app:showAsAction="never" />
+  <item android:id="@+id/menu_exportdata" android:title="Export Scan Data" app:showAsAction="never" />
+  <item android:id="@+id/menu_about" android:title="About" app:showAsAction="never" />
+  <item 
+    android:id="@+id/menu_exit" 
+    android:title="Exit" 
+    app:showAsAction="never" />
+  
 </menu>

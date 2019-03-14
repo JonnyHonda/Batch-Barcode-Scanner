@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+    <xamarin.controls.SignaturePadView
+        android:id="@+id/signatureView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/txtSignature"
+        android:background="@drawable/signature_bg"
+        app:signatureLineColor="#000000"
+        app:captionTextColor="#000000"
+        app:signaturePromptTextColor="#000000"
+        app:clearLabelTextColor="#000000" />
+	    <EditText
+		android:id="@+id/txtSignature"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnCancel"
+		 android:background="@drawable/txt_view_bg"
+        android:hint="@string/text_view_signee" />
+	
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" 
+		android:enabled="true"/>
+
+    <Button
+        android:id="@+id/btnComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+		android:enabled="true"
+		/>
+</RelativeLayout>
