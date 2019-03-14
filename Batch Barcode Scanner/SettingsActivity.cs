@@ -12,6 +12,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using static Batch_Barcode_Scanner.ScanSKUDataBase;
 
 namespace Batch_Barcode_Scanner
 {
@@ -165,7 +166,7 @@ namespace Batch_Barcode_Scanner
                 Log.Info("TAG-SETTINGS", "Loading regexs failed");
                 jsonTrackingRegexs = "[{\"Failed\": \"/" + e.Message + "/\"}]";
             }
-            databaseConnection.CreateTable<ScanSKUDataBase.TrackingNumberPatterns>();
+            databaseConnection.CreateTable<TrackingNumberPatterns>();
 
 
             List<Dictionary<string, string>> obj = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(jsonTrackingRegexs);
@@ -179,7 +180,7 @@ namespace Batch_Barcode_Scanner
                     int startIndex = testText.IndexOf('/');
                     int endIndex = testText.LastIndexOf('/');
                     string patternString = testText.Substring(startIndex + 1, endIndex - startIndex - 1);
-                    var record = new ScanSKUDataBase.TrackingNumberPatterns
+                    TrackingNumberPatterns record = new TrackingNumberPatterns
                     {
                         Courier = item.Key,
                         Pattern = patternString,

@@ -52,7 +52,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchPatternList()
         {
-            var scans = db.Query<ScanSKUDataBase.TrackingNumberPatterns>("SELECT * FROM TrackingNumberPatterns");
+            List<ScanSKUDataBase.TrackingNumberPatterns> scans = db.Query<ScanSKUDataBase.TrackingNumberPatterns>("SELECT * FROM TrackingNumberPatterns");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {

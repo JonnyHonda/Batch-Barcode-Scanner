@@ -45,7 +45,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchAll()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -57,7 +57,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchUnCollected()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans where isCollected = 0");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans where isCollected = 0");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -69,7 +69,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchCollected()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans  where isCollected = 1");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans  where isCollected = 1");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -81,7 +81,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchUnsent()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans WHERE Sent IS null");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans WHERE Sent IS null");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {

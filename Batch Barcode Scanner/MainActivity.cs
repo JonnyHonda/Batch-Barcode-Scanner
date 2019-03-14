@@ -128,7 +128,7 @@ namespace Batch_Barcode_Scanner
 
                             if (patternFound)
                             {
-                                var newScan = new ScanSKUDataBase.ParcelScans
+                                ParcelScans newScan = new ScanSKUDataBase.ParcelScans
                                 {
                                     TrackingNumber = TrackingScan.Text.ToUpper(),
                                     ScanTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
@@ -154,7 +154,7 @@ namespace Batch_Barcode_Scanner
                                 try
                                 {
                                     databaseConnection.Insert(newScan);
-                                    var TrackingListView = FindViewById<TextView>(Resource.Id.tracking_list);
+                                    TextView TrackingListView = FindViewById<TextView>(Resource.Id.tracking_list);
                                     TrackingListView.Text = TrackingScan.Text.ToUpper() + System.Environment.NewLine + TrackingListView.Text;
 
 
@@ -194,10 +194,10 @@ namespace Batch_Barcode_Scanner
                     // and the user would benefit from additional context for the use of the permission.
                     // For example if the user has previously denied the permission.
                     Log.Info("GPS", "Displaying GPS permission rationale to provide additional context.");
-                    var rootView = FindViewById<CoordinatorLayout>(Resource.Id.root_view);
+                    CoordinatorLayout rootView = FindViewById<CoordinatorLayout>(Resource.Id.root_view);
 
 
-                    var requiredPermissions = new String[] { Manifest.Permission.AccessFineLocation };
+                    String[] requiredPermissions = new String[] { Manifest.Permission.AccessFineLocation };
                     ActivityCompat.RequestPermissions(this, requiredPermissions, REQUEST_LOCATION);
                 }
                 else
@@ -245,7 +245,7 @@ namespace Batch_Barcode_Scanner
             {
 
 
-                var parcelScans = databaseConnection.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
+                List<ParcelScans>  parcelScans = databaseConnection.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
 
                 string fileName = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") + ".csv";
                 // Set a variable to the Documents path.
@@ -258,7 +258,7 @@ namespace Batch_Barcode_Scanner
                 }
 
                 // Notify the user about the completed "download"
-                var downloadManager = DownloadManager.FromContext(Android.App.Application.Context);
+                DownloadManager downloadManager = DownloadManager.FromContext(Android.App.Application.Context);
                 downloadManager.AddCompletedDownload(fileName, "Barcode Scan Data Export", true, "application/txt", filepath, File.ReadAllBytes(filepath).Length, true);
             }
             else
