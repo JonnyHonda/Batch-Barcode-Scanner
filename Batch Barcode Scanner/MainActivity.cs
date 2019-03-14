@@ -43,7 +43,6 @@ namespace Batch_Barcode_Scanner
 
         MediaPlayer mediaPlayer;
 
-        RecyclerView tracking_list;
         // RecyclerView.LayoutManager mLayoutManager;
         // TrackingNumberDataAdapter mAdapter;
         BarcodeScannerList mBarcodeScannerList;
