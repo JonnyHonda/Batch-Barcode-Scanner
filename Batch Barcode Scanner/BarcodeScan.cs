@@ -1,5 +1,8 @@
 ﻿using SQLite;
+using Android.Content;
+
 using System.Collections.Generic;
+using Android.App;
 
 namespace Batch_Barcode_Scanner
 {
@@ -16,7 +19,7 @@ namespace Batch_Barcode_Scanner
         {
             get { return BarcodeText; }
         }
-        
+
     }
 
     /// <summary>
@@ -25,8 +28,8 @@ namespace Batch_Barcode_Scanner
     public class BarcodeScannerList
     {
         static string dbPath = System.IO.Path.Combine(
-                        System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                        "localscandata.db3");
+                    System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+                     Application.Context.GetString(Resource.String.database_name));
         SQLiteConnection db = new SQLiteConnection(dbPath);
 
         List<BarcodeScan> CurrentScans = new List<BarcodeScan>();
@@ -36,13 +39,13 @@ namespace Batch_Barcode_Scanner
 
         public BarcodeScannerList()
         {
-          //  this.FetchBarcodeList();
+            //  this.FetchBarcodeList();
 
         }
 
         public void FetchAll()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -54,7 +57,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchUnCollected()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans where isCollected = 0");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans where isCollected = 0");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -66,7 +69,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchCollected()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans  where isCollected = 1");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans  where isCollected = 1");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -78,7 +81,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchUnsent()
         {
-            var scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans WHERE Sent IS null");
+            List<ScanSKUDataBase.ParcelScans> scans = db.Query<ScanSKUDataBase.ParcelScans>("SELECT * FROM ParcelScans WHERE Sent IS null");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
@@ -93,7 +96,7 @@ namespace Batch_Barcode_Scanner
         {
             get { return barcodes.Length; }
         }
-        
+
         // Indexer (read only) for accessing a barcode:
         public BarcodeScan this[int i]
         {
@@ -102,4 +105,3 @@ namespace Batch_Barcode_Scanner
 
     }
 }
- 

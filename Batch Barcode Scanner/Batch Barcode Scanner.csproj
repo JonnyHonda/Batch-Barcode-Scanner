@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Batch_Barcode_Scanner</RootNamespace>
-    <AssemblyName>Batch Barcode Scanner</AssemblyName>
+    <AssemblyName>JonnyHonda</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -66,8 +66,6 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Preferences.cs" />
     <Compile Include="RegEx.cs" />
-    <Compile Include="RegExDataAdapter.cs" />
-    <Compile Include="RegExViewHolder.cs" />
     <Compile Include="RemoteServiceResult.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,8 +73,6 @@
     <Compile Include="SettingsActivity.cs" />
     <Compile Include="SignatureActivity.cs" />
     <Compile Include="SqliteActivity.cs" />
-    <Compile Include="TrackingNumberDataAdapter.cs" />
-    <Compile Include="TrackingNumberViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -8,4 +8,6 @@
   <string name="regex_table">Current Regexes</string>
   <string name="code_name">"The Menagerie"</string>
   <string name="author_name">John Burrin</string>
+  <string name="database_name">localscandata.db3</string>
+
 </resources>

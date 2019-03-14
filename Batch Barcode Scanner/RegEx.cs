@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Android.App;
+using SQLite;
 using System.Collections.Generic;
 
 namespace Batch_Barcode_Scanner
@@ -35,7 +36,7 @@ namespace Batch_Barcode_Scanner
     {
         static readonly string dbPath = System.IO.Path.Combine(
                         System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                        "localscandata.db3");
+                          Application.Context.GetString(Resource.String.database_name));
         SQLiteConnection db = new SQLiteConnection(dbPath);
 
         List<RegExPattern> CurrentScans = new List<RegExPattern>();
@@ -51,7 +52,7 @@ namespace Batch_Barcode_Scanner
 
         public void FetchPatternList()
         {
-            var scans = db.Query<ScanSKUDataBase.TrackingNumberPatterns>("SELECT * FROM TrackingNumberPatterns");
+            List<ScanSKUDataBase.TrackingNumberPatterns> scans = db.Query<ScanSKUDataBase.TrackingNumberPatterns>("SELECT * FROM TrackingNumberPatterns");
             CurrentScans.Clear();
             foreach (var scan in scans)
             {
