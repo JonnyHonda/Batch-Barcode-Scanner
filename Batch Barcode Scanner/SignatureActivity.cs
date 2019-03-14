@@ -96,8 +96,8 @@ namespace Batch_Barcode_Scanner
 
         private void PushDataToEndPoint(string SignatureImage, string SignatureText)
         {
-            Context mContext = Application.Context;
-            AppPreferences ap = new AppPreferences(mContext);
+            Context AppContext = Application.Context;
+            AppPreferences ap = new AppPreferences(AppContext);
             string httpEndPoint = ap.GetAccessKey("submitDataUrl");
             string loadConfigUrl = ap.GetAccessKey("loadConfigUrl");
             string applicationKey = ap.GetAccessKey("applicationKey");
@@ -106,7 +106,7 @@ namespace Batch_Barcode_Scanner
             string retentionPeriod = ap.GetAccessKey("retentionPeriod");
             string databasePath = System.IO.Path.Combine(
                 System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                "localscandata.db3");
+                 GetString(Resource.String.database_name));
             // Create a Dictionary for the parameters
             Dictionary<string, string> Parameters = new Dictionary<string, string>
                     {
@@ -161,8 +161,8 @@ namespace Batch_Barcode_Scanner
 
         private void SetBatchNumber(bool regenerate)
         {
-            Context mContext = Application.Context;
-            AppPreferences applicationPreferences = new AppPreferences(mContext);
+            Context AppContext = Application.Context;
+            AppPreferences applicationPreferences = new AppPreferences(AppContext);
             if (string.IsNullOrEmpty(applicationPreferences.GetAccessKey("batchnumber")) || regenerate)
             {
                 Guid batch = Guid.NewGuid();

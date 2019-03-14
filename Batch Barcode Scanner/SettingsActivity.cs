@@ -25,8 +25,8 @@ namespace Batch_Barcode_Scanner
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestedOrientation = ScreenOrientation.Portrait;
-            Context mContext = Application.Context;
-            AppPreferences applicationPreferences = new AppPreferences(mContext);
+            Context AppContext = Application.Context;
+            AppPreferences applicationPreferences = new AppPreferences(AppContext);
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_settings);
@@ -52,7 +52,7 @@ namespace Batch_Barcode_Scanner
 
             string databasePath = System.IO.Path.Combine(
                 System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                "localscandata.db3");
+                 GetString(Resource.String.database_name));
             SQLiteConnection databaseConnection = new SQLiteConnection(databasePath);
             databaseConnection.CreateTable<ScanSKUDataBase.TrackingNumberPatterns>();
 
@@ -138,7 +138,7 @@ namespace Batch_Barcode_Scanner
 
             string databasePath = System.IO.Path.Combine(
             System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-            "localscandata.db3");
+             GetString(Resource.String.database_name));
             SQLiteConnection databaseConnection = new SQLiteConnection(databasePath);
             // Delete the current Regex data
             try

@@ -52,8 +52,8 @@ namespace Batch_Barcode_Scanner
         protected override void OnCreate(Bundle savedInstanceState)
         {
             RequestedOrientation = ScreenOrientation.Portrait;
-            Context applicationContext = Application.Context;
-            AppPreferences applicationPreferences = new AppPreferences(applicationContext);
+            Context AppContext = Application.Context;
+            AppPreferences applicationPreferences = new AppPreferences(AppContext);
             // Check application Preferences have been saved previously if not open Settings Activity and wait there.
             if (
                 string.IsNullOrEmpty(applicationPreferences.GetAccessKey("submitDataUrl")) ||
@@ -78,9 +78,10 @@ namespace Batch_Barcode_Scanner
             }
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
+
             databasePath = System.IO.Path.Combine(
                 System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                "localscandata.db3");
+                GetString(Resource.String.database_name));
             databaseConnection = new SQLiteConnection(databasePath);
             // Create the ParcelScans table
             databaseConnection.CreateTable<ScanSKUDataBase.ParcelScans>();

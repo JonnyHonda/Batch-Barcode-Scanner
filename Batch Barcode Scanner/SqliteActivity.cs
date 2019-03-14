@@ -22,7 +22,7 @@ namespace Batch_Barcode_Scanner
 
             string dbPath = System.IO.Path.Combine(
                     System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                    "localscandata.db3");
+                     GetString(Resource.String.database_name));
             var db = new SQLiteConnection(dbPath);
             TableQuery<ParcelScans> parcelScans = db.Table<ParcelScans>();
             TextView Tv = FindViewById<TextView>(Resource.Id.text_view);
@@ -37,10 +37,11 @@ namespace Batch_Barcode_Scanner
                     Tv.Append(parcelScan.ToString());
                     Tv.Append(System.Environment.NewLine);
                 }
-            }catch{}
+            }
+            catch { }
 
             TableQuery<TrackingNumberPatterns> patterns = db.Table<TrackingNumberPatterns>();
-            
+
             Tv.Append("======= TrackingNumberPatterns ==========");
             Tv.Append(System.Environment.NewLine);
             try
@@ -70,7 +71,7 @@ namespace Batch_Barcode_Scanner
                 case Resource.Id.menu_sqldatadelete:
                     string dbPath = System.IO.Path.Combine(
                    System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                   "localscandata.db3");
+                    GetString(Resource.String.database_name));
                     var db = new SQLiteConnection(dbPath);
                     db.DeleteAll<ScanSKUDataBase.ParcelScans>();
 

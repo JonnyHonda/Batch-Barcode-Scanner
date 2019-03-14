@@ -3609,6 +3609,9 @@ namespace Batch_Barcode_Scanner
 			// aapt resource value: 0x7f0a0031
 			public const int code_name = 2131361841;
 			
+			// aapt resource value: 0x7f0a0033
+			public const int database_name = 2131361843;
+			
 			// aapt resource value: 0x7f0a0021
 			public const int password_toggle_content_description = 2131361825;
 			

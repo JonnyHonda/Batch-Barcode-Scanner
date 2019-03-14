@@ -1,5 +1,8 @@
 ﻿using SQLite;
+using Android.Content;
+
 using System.Collections.Generic;
+using Android.App;
 
 namespace Batch_Barcode_Scanner
 {
@@ -16,7 +19,7 @@ namespace Batch_Barcode_Scanner
         {
             get { return BarcodeText; }
         }
-        
+
     }
 
     /// <summary>
@@ -25,8 +28,8 @@ namespace Batch_Barcode_Scanner
     public class BarcodeScannerList
     {
         static string dbPath = System.IO.Path.Combine(
-                        System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                        "localscandata.db3");
+                    System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+                     Application.Context.GetString(Resource.String.database_name));
         SQLiteConnection db = new SQLiteConnection(dbPath);
 
         List<BarcodeScan> CurrentScans = new List<BarcodeScan>();
@@ -36,7 +39,7 @@ namespace Batch_Barcode_Scanner
 
         public BarcodeScannerList()
         {
-          //  this.FetchBarcodeList();
+            //  this.FetchBarcodeList();
 
         }
 
@@ -93,7 +96,7 @@ namespace Batch_Barcode_Scanner
         {
             get { return barcodes.Length; }
         }
-        
+
         // Indexer (read only) for accessing a barcode:
         public BarcodeScan this[int i]
         {
@@ -102,4 +105,3 @@ namespace Batch_Barcode_Scanner
 
     }
 }
- 
