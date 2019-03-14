@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Batch_Barcode_Scanner</RootNamespace>
-    <AssemblyName>Batch Barcode Scanner</AssemblyName>
+    <AssemblyName>JonnyHonda</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
