@@ -1,6 +1,6 @@
 
 # Batch Barcode Scanner App
-This application has been designed to work specifically on the **M Series Rugged Android Barcode Scanner** see - https://www.scansku.com/uk/features/
+This application has been designed to work specifically on the **M Series Rugged Android Barcode Scanner** see - https://www.scansku.com/uk/features/. You will need the 2D capable model though. 
 
 ### Application features
 - Configurable data submission endpoint
@@ -62,19 +62,19 @@ alternatively this regular expression will allow anything to be scanned
     "all": "/^*/gi"
     }]
 
-The application will not scan anything without some for of regular expression set, so if you don't have a need to filter out scans or don't know what regular expressions are use the second example.
+The application will not scan anything without some form of regular expression set, so if you don't have a need to filter out scans or don't know what regular expressions are, use the second example.
 
 **Export stored data to CSV**
 Any data that application has will can be exported as CSV file, this file will be downed and stored in the devices default **Downloads** location, a notification will be raised when the download is complete.
 
 **GPS location of scans**
-If you device has GPS, this can be enabled and used as part of the uploaded data
+If your device has GPS, this can be enabled and used as part of the uploaded data
 
 **Security Token support**
 It is possible to set a configurable value *ApplicationKey* as a security token, the application will send this in the HTTP headers of the data as *x-scansku-api-key*  your receiving application can use this key/value pair to identify that the data is coming from a valid device.
 
 **Batched uploads**
-A group of scans taken in one session and then uploaded is called a batch, then a new batch is created ready for the next upload. If an upload was to fail the items are still considered as batched but just not sent and a new batch will still be created. When the application is able to send all previous batches are sent, each batch will have a unique batch number sent both in the header as *x-scansku-batch* and in the root of the uploaded JSON data as *batch*.
+A group of scans taken in one session and then uploaded is called a batch, then a new batch is created ready for the next upload. If an upload was to fail the items are still considered as batched but just not sent and a new batch will still be created. When the application is able to send, all previous batches are sent, each batch will have a unique batch number sent both in the header as *x-scansku-batch* and in the root of the uploaded JSON data as *batch*.
 
 **JSON data submission**
 The data is as a JSON  object, the HTTP headers will contain the following additional information
