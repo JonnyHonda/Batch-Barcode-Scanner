@@ -1,4 +1,4 @@
-# ScanSku Scanner App
+# Batch Barcode Scanner App
 
 This application has been designed to work specifically on the **M Series Rugged Android Barcode Scanner** see - https://www.scansku.com/uk/features/
 
@@ -11,6 +11,7 @@ This application has been designed to work specifically on the **M Series Rugged
 - Security Token support
 - Batched uploads
 - JSON data submission
+- Base64 Encoded Signature images
 
 **Configurable data submission endpoint**
 The application is configured by a a QR code, doing allows the application to be configured in a single scan. This code is a simple JSON object that contains the name value pairs of configuration items.
@@ -91,6 +92,8 @@ The JSON object will follow the following example
         "longitude": -0.601631666666667
       },
       "batch": "7ddd4005-c25a-4e85-9bef-efe9c7640227",
+	  "SignatureImage":"",
+	  "SignatureText":"JonnyHonda",
       "scans": [
         {
           "barcode": "PBJY0562315001",
@@ -111,5 +114,5 @@ The JSON object will follow the following example
       ]
     }
 
-The *root* object contains the date/time, batch number and gps location of the attempted upload, the *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates 
+The *root* object contains the date/time, batch number and gps location of the attempted upload, if the upload is signed for, the root object will optional include a base64 encoded string of the signature image and the signature as text. The *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates 
 
