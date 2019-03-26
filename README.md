@@ -1,5 +1,5 @@
-# ScanSku Scanner App
 
+# Batch Barcode Scanner App
 This application has been designed to work specifically on the **M Series Rugged Android Barcode Scanner** see - https://www.scansku.com/uk/features/
 
 ### Application features
@@ -11,6 +11,8 @@ This application has been designed to work specifically on the **M Series Rugged
 - Security Token support
 - Batched uploads
 - JSON data submission
+- Base64 Encoded Signature images
+
 
 **Configurable data submission endpoint**
 The application is configured by a a QR code, doing allows the application to be configured in a single scan. This code is a simple JSON object that contains the name value pairs of configuration items.
