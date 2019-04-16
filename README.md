@@ -93,8 +93,8 @@ The JSON object will follow the following example
         "longitude": -0.601631666666667
       },
       "batch": "7ddd4005-c25a-4e85-9bef-efe9c7640227",
-      "SignatureImage": "",
-      "SignatureText": "JonnyHonda",
+      "signatureimage": "",
+      "signaturetext": "JonnyHonda",
       "scans": [
         {
           "barcode": "PBJY0562315001",
