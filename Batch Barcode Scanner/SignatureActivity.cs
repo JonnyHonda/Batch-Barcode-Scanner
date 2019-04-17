@@ -268,7 +268,7 @@ namespace Batch_Barcode_Scanner
 
                     HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
-
+                    Log.Info("TAG-ASYNCTASK", "Fetch Response");
                     using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
                         string jsonResult = streamReader.ReadToEnd();

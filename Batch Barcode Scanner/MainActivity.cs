@@ -284,10 +284,10 @@ namespace Batch_Barcode_Scanner
                     break;
 
                 case Resource.Id.menu_signature:
-                    Context mContext = Application.Context;
-                    AppPreferences applicationPreferences = new AppPreferences(mContext);
-                    applicationPreferences.SaveAccessKey("lastKnownLongitude", currentLocation.Longitude.ToString());
-                    applicationPreferences.SaveAccessKey("lastKnownLatitude", currentLocation.Latitude.ToString());
+                    //Context mContext = Application.Context;
+                    //AppPreferences applicationPreferences = new AppPreferences(mContext);
+                    //applicationPreferences.SaveAccessKey("lastKnownLongitude", currentLocation.Longitude.ToString());
+                    //applicationPreferences.SaveAccessKey("lastKnownLatitude", currentLocation.Latitude.ToString());
                     StartActivity(typeof(SignaturPadActivity));
                     break;
                 case Resource.Id.menu_sqldata:
@@ -365,6 +365,8 @@ namespace Batch_Barcode_Scanner
         public void OnLocationChanged(Location location)
         {
             currentLocation = location;
+            Context mContext = Application.Context;
+            AppPreferences applicationPreferences = new AppPreferences(mContext);
             if (currentLocation == null)
             {
                 TrackingScan.SetBackgroundColor(Android.Graphics.Color.LightPink);
@@ -373,6 +375,8 @@ namespace Batch_Barcode_Scanner
             }
             else
             {
+                applicationPreferences.SaveAccessKey("lastKnownLongitude", currentLocation.Longitude.ToString());
+                applicationPreferences.SaveAccessKey("lastKnownLatitude", currentLocation.Latitude.ToString());
                 coordinates.Text = "Lat:" + currentLocation.Latitude.ToString(("#.00000")) + " / Long:" + currentLocation.Longitude.ToString(("#.00000"));
             }
         }

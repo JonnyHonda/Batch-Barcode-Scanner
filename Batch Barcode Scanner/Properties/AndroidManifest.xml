@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0" package="JonnyHonda.Batch_Barcode_Scanner" android:installLocation="auto" android:versionCode="2">
-	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="27" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0" package="JonnyHonda.Batch_Barcode_Scanner" android:installLocation="internalOnly" android:versionCode="8">
+	<uses-sdk android:targetSdkVersion="25" android:minSdkVersion="22" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
