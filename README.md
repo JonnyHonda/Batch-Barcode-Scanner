@@ -45,7 +45,7 @@ This JSON object can be converted to a QR code here https://www.barcodesinc.com/
 *RetentionPeriod*: This is simply the number of days that the application will retain the data, every time the application is requested to upload the data it will check and delete any data older than the retention period in days.
 
 **Configurable Regular expression filters** 
-Complex regular expressions can be setup to filter out unwanted scans, foe example the following example filters for only these specific courier barcodes.
+Complex regular expressions can be setup to filter out unwanted scans, for example the following example filters for only these specific courier barcodes.
 
      [{ 
          "royal-mail": "/^([A-Z]{2}[0-9]{9}GB)/gi",
@@ -93,8 +93,8 @@ The JSON object will follow the following example
         "longitude": -0.601631666666667
       },
       "batch": "7ddd4005-c25a-4e85-9bef-efe9c7640227",
-      "SignatureImage": "",
-      "SignatureText": "JonnyHonda",
+      "signatureimage": "",
+      "signaturetext": "JonnyHonda",
       "scans": [
         {
           "barcode": "PBJY0562315001",
@@ -115,5 +115,5 @@ The JSON object will follow the following example
       ]
     }
 
-The *root* object contains the date/time, batch number and gps location of the attempted upload, the *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates, in addition if a signature was supplied at the time of upload tgis will be included as Base64 encoded text in the SignatureImage field.
+The *root* object contains the date/time, batch number and gps location of the attempted upload, the *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates, in addition if a signature was supplied at the time of upload this will be included as Base64 encoded text in the SignatureImage field.
 
