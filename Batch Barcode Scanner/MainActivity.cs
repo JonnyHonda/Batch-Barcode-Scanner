@@ -95,93 +95,10 @@ namespace Batch_Barcode_Scanner
                 InitializeLocationManager();
 
                 coordinates = FindViewById<TextView>(Resource.Id.footer_text);
-
-
                 TrackingScan = FindViewById<EditText>(Resource.Id.txtentry);
-
                 TrackingScan.Text = "";
                 TrackingScan.RequestFocus();
-
-                TrackingScan.KeyPress += (object sender, View.KeyEventArgs e) =>
-                {
-                    if ((e.Event.Action == KeyEventActions.Down) && (e.KeyCode == Keycode.Enter))
-                    {
-                        if (e.Event.RepeatCount == 0)
-                        {
-                            /// need to regex the scan against the Tracking Patterns
-                            /// 
-                            TableQuery<TrackingNumberPatterns> trackingPatterns = databaseConnection.Table<TrackingNumberPatterns>();
-
-                            bool patternFound = false;
-                            try
-                            {
-                                foreach (var trackingPattern in trackingPatterns)
-                                {
-                                    Match m = Regex.Match(@TrackingScan.Text, @trackingPattern.Pattern, RegexOptions.IgnoreCase);
-                                    if (m.Success)
-                                    {
-                                        patternFound = true;
-                                    }
-                                }
-                            }
-                            catch { }
-
-                            if (patternFound)
-                            {
-                                ParcelScans newScan = new ScanSKUDataBase.ParcelScans
-                                {
-                                    TrackingNumber = TrackingScan.Text.ToUpper(),
-                                    ScanTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
-                                    Batch = batchnumber,
-                                    Sent = null
-                                };
-                                try
-                                {
-                                    newScan.Longitude = currentLocation.Longitude;
-                                }
-                                catch
-                                {
-                                    newScan.Longitude = null;
-                                }
-                                try
-                                {
-                                    newScan.Latitude = currentLocation.Latitude;
-                                }
-                                catch
-                                {
-                                    newScan.Latitude = null;
-                                }
-                                try
-                                {
-                                    databaseConnection.Insert(newScan);
-                                    TextView TrackingListView = FindViewById<TextView>(Resource.Id.tracking_list);
-                                    TrackingListView.Text = TrackingScan.Text.ToUpper() + System.Environment.NewLine + TrackingListView.Text;
-
-
-                                    //mBarcodeScannerList.FetchUnCollected();
-
-                                    //mAdapter.NotifyDataSetChanged();
-                                    //mRecyclerView.RefreshDrawableState();
-                                    mediaPlayer.Start();
-                                }
-                                catch (SQLiteException ex)
-                                {
-                                    Toast.MakeText(this, "Scan Error : Duplicated Barcode Scan", ToastLength.Long).Show();
-                                    Log.Info("SCANNER", "Scan Error : " + ex.Message);
-
-                                }
-                            }
-                            else
-                            {
-                                Toast.MakeText(this, "Barcode format not recognised", ToastLength.Short).Show();
-                            }
-
-                            TrackingScan.RequestFocus();
-                            TrackingScan.Text = "";
-                        }
-                    }
-                };
-
+                TrackingScan.SetOnKeyListener(new MyKeyListener(this));
             }
             else
             {
@@ -313,15 +230,10 @@ namespace Batch_Barcode_Scanner
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
-            /*
-            View view = (View) sender;
-            Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (Android.Views.View.IOnClickListener)null).Show();
-                */
             StartActivity(typeof(SignaturPadActivity));
         }
 
-        /*
+  /*
     * From here on these functions releate to GPS and GPS permissions
     * 
     * 
@@ -423,6 +335,108 @@ namespace Batch_Barcode_Scanner
             // throw new NotImplementedException();
         }
 
+    }
+    public class MyKeyListener : Java.Lang.Object, View.IOnKeyListener
+    {
+        readonly MainActivity activity;
+        SQLiteConnection databaseConnection = null;
+
+        String databasePath;
+        EditText Barcode;
+        AppPreferences applicationPreferences;
+        bool patternFound;
+        MediaPlayer mediaPlayer;
+        string batchnumber;
+        Context mContext;
+
+
+        public MyKeyListener(MainActivity _activity)
+        {
+            activity = _activity; 
+             mContext = Application.Context;
+            applicationPreferences = new AppPreferences(mContext);
+            databasePath = System.IO.Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+                "localscandata.db3");
+            databaseConnection = new SQLiteConnection(databasePath);
+            mediaPlayer = MediaPlayer.Create(mContext, Resource.Raw.beep_07);
+            batchnumber = applicationPreferences.GetAccessKey("batchnumber");
+        }
+
+        public bool OnKey(View v, Keycode keyCode, KeyEvent e)
+        {
+            if (e.KeyCode == Keycode.Enter && e.Action == 0)
+            {
+                /// need to regex the scan against the Tracking Patterns
+                /// 
+                TableQuery<TrackingNumberPatterns> trackingPatterns = databaseConnection.Table<TrackingNumberPatterns>();
+                Barcode = (EditText)v;
+                bool patternFound = false;
+                try
+                {
+                    foreach (var trackingPattern in trackingPatterns)
+                    {
+                        Match m = Regex.Match(Barcode.Text, @trackingPattern.Pattern, RegexOptions.IgnoreCase);
+                        if (m.Success)
+                        {
+                            patternFound = true;
+                        }
+                    }
+                }
+                catch { }
+
+                if (patternFound)
+                {
+                    ParcelScans newScan = new ScanSKUDataBase.ParcelScans
+                    {
+                        TrackingNumber = Barcode.Text.ToUpper(),
+                        ScanTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"),
+                        Batch = applicationPreferences.GetAccessKey("batchnumber"),
+                        Sent = null
+                    };
+                    try
+                    {
+                        newScan.Longitude = Convert.ToDouble(applicationPreferences.GetAccessKey("lastKnownLongitude"));
+                            }
+                    catch
+                    {
+                        newScan.Longitude = null;
+                    }
+                    try
+                    {
+                        newScan.Latitude = Convert.ToDouble(applicationPreferences.GetAccessKey("lastKnownLLatitude"));
+                    }
+                    catch
+                    {
+                        newScan.Latitude = null;
+                    }
+                    try
+                    {
+                        databaseConnection.Insert(newScan);
+                        TextView TrackingListView = activity.FindViewById<TextView>(Resource.Id.tracking_list);
+                        TrackingListView.Text = Barcode.Text.ToUpper() + System.Environment.NewLine + TrackingListView.Text;
+
+                        mediaPlayer.Start();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                               Toast.MakeText(mContext, "Scan Error : Duplicated Barcode Scan", ToastLength.Long).Show();
+                        Log.Info("SCANNER", "Scan Error : " + ex.Message);
+
+                    }
+                }
+                else
+                {
+                            Toast.MakeText(mContext, "Barcode format not recognised", ToastLength.Short).Show();
+                }
+
+                Barcode.RequestFocus();
+                Barcode.Text = "";
+
+                return true;
+            }
+            return false;
+        }
     }
 }
 
