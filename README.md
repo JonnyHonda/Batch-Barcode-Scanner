@@ -1,3 +1,4 @@
+I am no longer maintaining this in this repo - please go to https://github.com/JohnBurrin/Batch-Barcode-Scanner for continued support
 
 # Batch Barcode Scanner App
 This application has been designed to work specifically on the **M Series Rugged Android Barcode Scanner** see - https://www.scansku.com/uk/features/. You will need the 2D capable model though. 
