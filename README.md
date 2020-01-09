@@ -15,7 +15,7 @@ This application has been designed to work specifically on the **M Series Rugged
 
 
 **Configurable data submission endpoint**
-The application is configured by a a QR code, doing allows the application to be configured in a single scan. This code is a simple JSON object that contains the name value pairs of configuration items.
+The application is configured by a QR code, doing this allows the application to be configured in a single scan. This code is a simple JSON object that contains the name value pairs of configuration items.
 
     {
     "UpdateConfiguration":[
@@ -56,7 +56,7 @@ Complex regular expressions can be setup to filter out unwanted scans, for examp
           "whistl": "/^(WSLL10064[0-9]{8})/gi"
         }]
 
-alternatively this regular expression will allow anything to be scanned 
+Alternatively this regular expression will allow anything to be scanned 
 
     [{
     "all": "/^*/gi"
@@ -65,7 +65,7 @@ alternatively this regular expression will allow anything to be scanned
 The application will not scan anything without some form of regular expression set, so if you don't have a need to filter out scans or don't know what regular expressions are, use the second example.
 
 **Export stored data to CSV**
-Any data that application has will can be exported as CSV file, this file will be downed and stored in the devices default **Downloads** location, a notification will be raised when the download is complete.
+Any data that application has stored locally can be exported as CSV file, this file will be down loaded and stored in the devices default **Downloads** location, a notification will be raised when the download is complete.
 
 **GPS location of scans**
 If your device has GPS, this can be enabled and used as part of the uploaded data
@@ -74,7 +74,7 @@ If your device has GPS, this can be enabled and used as part of the uploaded dat
 It is possible to set a configurable value *ApplicationKey* as a security token, the application will send this in the HTTP headers of the data as *x-scansku-api-key*  your receiving application can use this key/value pair to identify that the data is coming from a valid device.
 
 **Batched uploads**
-A group of scans taken in one session and then uploaded is called a batch, then a new batch is created ready for the next upload. If an upload was to fail the items are still considered as batched but just not sent and a new batch will still be created. When the application is able to send, all previous batches are sent, each batch will have a unique batch number sent both in the header as *x-scansku-batch* and in the root of the uploaded JSON data as *batch*.
+A group of scans taken in one session can uploaded as a batch, once done a new batch is created ready for the next upload. If an upload was to fail the items are still considered as batched but just not sent and a new batch will still be created. When the application is able to send agaion all previous batches are sent, each batch will have a unique batch number sent both in the header as *x-scansku-batch* and in the root of the uploaded JSON data as *batch*.
 
 **JSON data submission**
 The data is as a JSON  object, the HTTP headers will contain the following additional information
@@ -115,5 +115,5 @@ The JSON object will follow the following example
       ]
     }
 
-The *root* object contains the date/time, batch number and gps location of the attempted upload, the *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates, in addition if a signature was supplied at the time of upload this will be included as Base64 encoded text in the SignatureImage field.
+The *root* object contains the date/time, batch number and gps location of the attempted upload, the *scans* array will contain scanned barcode in the batch, the time it was scanned and the co-ordinates, in addition if a signature was supplied at the time of upload this will be included as Base64 encoded text in the `signatureimage` field.
 
